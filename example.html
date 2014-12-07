@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="jquery.position.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.message').position({
+                target:$('.container'),
+                left:'before',
+                top:'above'
+            });
+            $('select').on('change',function(){
+                $('.message').position({
+                    target:$('.container'),
+                    left:$('#left').val(),
+                    top:$('#top').val()
+                });
+            })
+        });
+    </script>
+    <style>
+        .message{
+            position: absolute;
+            width:150px;
+            height: 80px;
+            background-color: blue;
+            opacity: 0.4;
+            color:white;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .container{
+            text-align: center;
+                width:600px;
+                margin:150px auto 0;
+                height: 250px;
+                background-color: #ffff00;
+        }
+        ul>li{
+            float:left;
+            margin-right: 15px;;
+        }
+        ul{
+            overflow: hidden;;
+        }
+    </style>
+</head>
+
+
+<body>
+<div>
+    <ul>
+        <li>
+            <div>Position Y</div>
+            <select name="" id="top">
+                <option value="above">above</option>
+                <option value="top">top</option>
+                <option value="middle">middle</option>
+                <option value="bottom">bottom</option>
+                <option value="under">under</option>
+            </select>
+        </li>
+        <li>
+            <div>Position X</div>
+            <select name="" id="left">
+                <option value="before">before</option>
+                <option value="left">left</option>
+                <option value="center">center</option>
+                <option value="right">right</option>
+                <option value="after">after</option>
+            </select>
+        </li>
+    </ul>
+</div>
+<div class="container"><h1>container</h1></div>
+<div class="message">Popover<br/>message</div>
+
+<h1>Code</h1>
+<pre>
+$('.message').position({
+    target:$('.container'),
+    left:'before',
+    top:'above'
+});
+</pre>
+</body>
+</html>
