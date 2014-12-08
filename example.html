@@ -2,52 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>position.js - example</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="jquery.position.js"></script>
+    <script type="text/javascript" src="jquery.position.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             $('.message').position({
-                target:$('.container'),
+                target:'.container',
                 left:'before',
                 top:'above'
             });
+            $('select').prop('selectedIndex',0);
             $('select').on('change',function(){
                 $('.message').position({
                     target:$('.container'),
                     left:$('#left').val(),
-                    top:$('#top').val()
+                    top:$('#top').val(),
+                    animate:eval('('+$('#animation').val()+')'),
+                    complete: function() { console.log('Completed positioning!') },
+                    prepare: function() { console.log('Preparing positioning!') }
                 });
+                $('#left-code').text($('#left').val());
+                $('#top-code').text($('#top').val());
+                $('#animation-code').text($('#animation').val());
             })
         });
     </script>
-    <style>
-        .message{
-            position: absolute;
-            width:150px;
-            height: 80px;
-            background-color: blue;
-            opacity: 0.4;
-            color:white;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .container{
-            text-align: center;
-                width:600px;
-                margin:150px auto 0;
-                height: 250px;
-                background-color: #ffff00;
-        }
-        ul>li{
-            float:left;
-            margin-right: 15px;;
-        }
-        ul{
-            overflow: hidden;;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="example.css">
 </head>
 
 
@@ -74,17 +55,28 @@
                 <option value="after">after</option>
             </select>
         </li>
+        <li>
+            <div>Animation</div>
+            <select name="" id="animation">
+                <option value="false">false</option>
+                <option value="true">true</option>
+                <option value="{duration:600}">duration:600</option>
+                <option value="{duration:2000}">duration:2000</option>
+                <option value="{duration:400,easing:'linear'}">easing:linear</option>
+            </select>
+        </li>
     </ul>
 </div>
 <div class="container"><h1>container</h1></div>
-<div class="message">Popover<br/>message</div>
+<div class="message"><div>Popover<br/>message</div></div>
 
 <h1>Code</h1>
 <pre>
 $('.message').position({
-    target:$('.container'),
-    left:'before',
-    top:'above'
+    target: '.container',
+    left: '<span id="left-code">before</span>',
+    top: '<span id="top-code">after</span>',
+    animation: <span id="animation-code">false</span>
 });
 </pre>
 </body>
