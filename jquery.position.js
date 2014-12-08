@@ -57,7 +57,7 @@ $.fn.position = function(conf){
     var top = utils[y](targetY,targetHeight,height);
     var left = utils[x](targetX,targetWidth,width);
     if (conf.animate) {
-        var options = ($.isArray(conf.animate) ? conf.animate : {duration:400} );
+        var options = ($.type(conf.animate)=="object" ? conf.animate : {duration:400} );
         this.animate({
             top:top.y,
             left:left.x

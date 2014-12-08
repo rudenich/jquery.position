@@ -12,15 +12,17 @@
                 left:'before',
                 top:'above'
             });
+            $('select').prop('selectedIndex',0);
             $('select').on('change',function(){
                 $('.message').position({
                     target:$('.container'),
                     left:$('#left').val(),
                     top:$('#top').val(),
-                    animate:{
-                        duration: 150
-                    }
+                    animate:eval('('+$('#animation').val()+')')
                 });
+                $('#left-code').text($('#left').val());
+                $('#top-code').text($('#top').val());
+                $('#animation-code').text($('#animation').val());
             })
         });
     </script>
@@ -29,26 +31,40 @@
             position: absolute;
             width:150px;
             height: 80px;
-            background-color: blue;
-            opacity: 0.4;
+            background-color: #c34e00;
             color:white;
-            border-radius: 10px;
             text-align: center;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
         }
 
         .container{
             text-align: center;
-                width:600px;
-                margin:150px auto 0;
-                height: 250px;
-                background-color: #ffff00;
+            width:600px;
+            margin:150px auto 0;
+            height: 250px;
+            background-color: #ff6600;
+            color: #FFF;
+            font-family: Arial, sans-serif;
+        }
+        .container:before, .message:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -0.25em;
+        }
+        .container h1, .message div {
+            display: inline-block;
+            vertical-align: middle;
         }
         ul>li{
             float:left;
-            margin-right: 15px;;
+            margin-right: 15px;
+            list-style-type: none;
         }
         ul{
-            overflow: hidden;;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -77,17 +93,28 @@
                 <option value="after">after</option>
             </select>
         </li>
+        <li>
+            <div>Animation</div>
+            <select name="" id="animation">
+                <option value="false">false</option>
+                <option value="true">true</option>
+                <option value="{duration:600}">duration:600</option>
+                <option value="{duration:2000}">duration:2000</option>
+                <option value="{duration:400,easing:'linear'}">easing:linear</option>
+            </select>
+        </li>
     </ul>
 </div>
 <div class="container"><h1>container</h1></div>
-<div class="message">Popover<br/>message</div>
+<div class="message"><div>Popover<br/>message</div></div>
 
 <h1>Code</h1>
 <pre>
 $('.message').position({
-    target:$('.container'),
-    left:'before',
-    top:'above'
+    target: '.container',
+    left: '<span id="left-code">before</span>',
+    top: '<span id="top-code">after</span>',
+    animation: <span id="animation-code">false</span>
 });
 </pre>
 </body>
