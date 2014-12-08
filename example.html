@@ -8,7 +8,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('.message').position({
-                target:$('.container'),
+                target:'.container',
                 left:'before',
                 top:'above'
             });
@@ -16,7 +16,10 @@
                 $('.message').position({
                     target:$('.container'),
                     left:$('#left').val(),
-                    top:$('#top').val()
+                    top:$('#top').val(),
+                    animate:{
+                        duration: 150
+                    }
                 });
             })
         });

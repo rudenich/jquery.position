@@ -42,7 +42,7 @@
         }
     };
 $.fn.position = function(conf){
-    var target = conf.target;
+    var target = $(conf.target);
     var x = conf.left;
     var y = conf.top;
 
@@ -56,10 +56,18 @@ $.fn.position = function(conf){
 
     var top = utils[y](targetY,targetHeight,height);
     var left = utils[x](targetX,targetWidth,width);
-    this.css({
-        top:top.y,
-        left:left.x
-    });
+    if (conf.animate) {
+        var options = ($.isArray(conf.animate) ? conf.animate : {duration:400} );
+        this.animate({
+            top:top.y,
+            left:left.x
+        },options);
+    } else {
+        this.css({
+            top:top.y,
+            left:left.x
+        });
+    }
 }
 
 })(jQuery)
