@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>position.js - example</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="jquery.position.js"></script>
     <script type="text/javascript">
@@ -18,7 +18,9 @@
                     target:$('.container'),
                     left:$('#left').val(),
                     top:$('#top').val(),
-                    animate:eval('('+$('#animation').val()+')')
+                    animate:eval('('+$('#animation').val()+')'),
+                    complete: function() { console.log('Completed positioning!') },
+                    prepare: function() { console.log('Preparing positioning!') }
                 });
                 $('#left-code').text($('#left').val());
                 $('#top-code').text($('#top').val());

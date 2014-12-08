@@ -42,6 +42,11 @@
         }
     };
 $.fn.position = function(conf){
+
+    if (conf.prepare){
+        conf.prepare();
+    }
+
     var target = $(conf.target);
     var x = conf.left;
     var y = conf.top;
@@ -56,8 +61,12 @@ $.fn.position = function(conf){
 
     var top = utils[y](targetY,targetHeight,height);
     var left = utils[x](targetX,targetWidth,width);
+
     if (conf.animate) {
         var options = ($.type(conf.animate)=="object" ? conf.animate : {duration:400} );
+        if (conf.complete) {
+            options.complete = conf.complete;
+        }
         this.animate({
             top:top.y,
             left:left.x
@@ -67,6 +76,9 @@ $.fn.position = function(conf){
             top:top.y,
             left:left.x
         });
+        if (conf.complete){
+            conf.complete();
+        }
     }
 }
 
