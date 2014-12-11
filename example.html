@@ -9,14 +9,12 @@
         $(document).ready(function(){
             $('.message').position({
                 target:$('.container'),
-                left:'before',
-                top:'above'
+                position:['before','above']
             });
             $('select').on('change',function(){
                 $('.message').position({
                     target:$('.container'),
-                    left:$('#left').val(),
-                    top:$('#top').val()
+                    position:[$('#left').val(),$('#top').val()]
                 });
             })
         });
@@ -87,5 +85,6 @@ $('.message').position({
     top:'above'
 });
 </pre>
+
 </body>
 </html>
